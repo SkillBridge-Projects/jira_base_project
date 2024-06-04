@@ -21,6 +21,7 @@ const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
   const sharedProps = {
     className,
     size,
+    title: name,
     'data-testid': name ? `avatar:${name}` : 'avatar',
     ...otherProps,
   };
