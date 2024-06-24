@@ -20,6 +20,19 @@ const propTypes = {
   mergeFilters: PropTypes.func.isRequired,
 };
 
+function capitalizeWords(str) {
+  // Split the string into an array of words
+  let words = str.split(" ");
+
+  // Capitalize the first letter of each word
+  let capitalizedWords = words.map(word => {
+      return word[0].toUpperCase() + word.slice(1);
+  });
+
+  // Join the words back into a single string
+  return capitalizedWords.join(" ");
+}
+
 const ProjectBoardFilters = ({ projectUsers, defaultFilters, filters, mergeFilters }) => {
   const { searchTerm, userIds, myOnly, recent } = filters;
 
@@ -38,7 +51,7 @@ const ProjectBoardFilters = ({ projectUsers, defaultFilters, filters, mergeFilte
             <StyledAvatar
               avatarUrl={user.avatarUrl}
               name={user.name}
-              title={user.name}
+              title= {capitalizeWords(user.name)}
               onClick={() => mergeFilters({ userIds: xor(userIds, [user._id]) })}
             />
           </AvatarIsActiveBorder>
