@@ -52,6 +52,7 @@ const ProjectBoardFilters = ({ projectUsers, defaultFilters, filters, mergeFilte
               avatarUrl={user.avatarUrl}
               name={user.name}
               title= {capitalizeWords(user.name)}
+              avatarColor = {user.avatarColor}
               onClick={() => mergeFilters({ userIds: xor(userIds, [user._id]) })}
             />
           </AvatarIsActiveBorder>

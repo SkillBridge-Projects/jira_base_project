@@ -11,7 +11,7 @@ import { updateArrayItemById } from 'shared/utils/javascript';
 import { Item } from 'Project/NavbarLeft/Styles';
 import { ActionButton, Actions } from 'Project/IssueCreate/Styles';
 import useCurrentUser from 'shared/hooks/currentUser';
-
+import { avatarColors } from 'shared/constants/keyCodes';
 
 import IssueCreate from '../IssueCreate';
 import Header from './Header';
@@ -36,7 +36,7 @@ const defaultFilters = {
 const ProjectBoard = ({ currentProject, fetchProject, issueCreateModalOpen }) => {
   const match = useRouteMatch();
   const history = useHistory();
-  const { currentUser } = useCurrentUser();
+  const { currentUserId } = useCurrentUser();
   const [filters, mergeFilters] = useMergeState(defaultFilters);
   const issueCreateModalHelpers = createQueryParamModalHelpers('issue-create');
 
@@ -68,6 +68,14 @@ const ProjectBoard = ({ currentProject, fetchProject, issueCreateModalOpen }) =>
 
   const { project } = projectData;
 
+  const generateAvatarColor = () => {
+    return avatarColors[Math.floor(Math.random()* 10)];
+  }
+
+  project.users.forEach(user => {
+    user.avatarColor = generateAvatarColor()
+  })
+  const currentUser = project.users.find(user => user._id === currentUserId)
   return (
     <Fragment>
       {/* // user avatar with breadcrumbs */}
@@ -79,7 +87,7 @@ const ProjectBoard = ({ currentProject, fetchProject, issueCreateModalOpen }) =>
           </ActionButton>
         </div>
         <div>
-          {currentUser && <Avatar name={currentUser.name} avatarUrl={currentUser.avatarUrl} />}
+          {currentUser && <Avatar name={currentUser.name} avatarColor={currentUser.avatarColor} avatarUrl={currentUser.avatarUrl} />}
         </div>
       </div>
       <Header />

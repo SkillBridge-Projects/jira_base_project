@@ -8,6 +8,7 @@ const propTypes = {
   avatarUrl: PropTypes.string,
   name: PropTypes.string,
   size: PropTypes.number,
+  avatarColor: PropTypes.string
 };
 
 const defaultProps = {
@@ -17,10 +18,11 @@ const defaultProps = {
   size: 32,
 };
 
-const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
+const Avatar = ({ className, avatarUrl, name, size, avatarColor, ...otherProps }) => {
   const sharedProps = {
     className,
     size,
+    avatarColor,
     'data-testid': name ? `avatar:${name}` : 'avatar',
     ...otherProps,
   };
@@ -30,24 +32,11 @@ const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
   }
 
   return (
-    <Letter color={getColorFromName(name)} {...sharedProps}>
+    <Letter color={avatarColor} {...sharedProps}>
       <span>{name.charAt(0)}</span>
     </Letter>
   );
 };
-
-const colors = [
-  '#DA7657',
-  '#6ADA57',
-  '#5784DA',
-  '#AA57DA',
-  '#DA5757',
-  '#DA5792',
-  '#57DACA',
-  '#57A5DA',
-];
-
-const getColorFromName = name => colors[name.toLocaleLowerCase().charCodeAt(0) % colors.length];
 
 Avatar.propTypes = propTypes;
 Avatar.defaultProps = defaultProps;
