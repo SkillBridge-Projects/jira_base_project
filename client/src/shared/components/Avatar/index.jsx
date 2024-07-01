@@ -21,6 +21,9 @@ const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
   const sharedProps = {
     className,
     size,
+    // title: 
+    // name.charAt(0).toUpperCase()+ name.slice(1),
+    title: name.split(' ').map(name => name.charAt(0).toUpperCase() + name.slice(1)).join(' '), 
     'data-testid': name ? `avatar:${name}` : 'avatar',
     ...otherProps,
   };
@@ -47,7 +50,13 @@ const colors = [
   '#57A5DA',
 ];
 
-const getColorFromName = name => colors[name.toLocaleLowerCase().charCodeAt(0) % colors.length];
+
+const getColorFromName = name => {
+  const sumCharCodes = name.toLocaleLowerCase()
+                          .split('')
+                          .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return colors[sumCharCodes % colors.length];
+};
 
 Avatar.propTypes = propTypes;
 Avatar.defaultProps = defaultProps;
