@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "26f2ed8b-d0ae-423a-a40d-bc019c02d3f6",
+		"name": "jira",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37437977",
+		"_collection_link": "https://javeednz.postman.co/workspace/New-Team-Workspace~aea56d42-dd9c-4f11-a6d8-3a8e13e1bddc/collection/30791503-26f2ed8b-d0ae-423a-a40d-bc019c02d3f6?action=share&source=collection_link&creator=37437977"
+	},
+	"item": [
+		{
+			"name": "{{url}}/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"test@mail.com\",\n    \"password\":\"testuser\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/currentUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/currentUser",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"currentUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{userId}}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{        \"name\": \"Testuser\",\n        \"email\": \"test@mail.com\",\n        \"isAdmin\": true,\n        \"projects\": [\"QA Track\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/:userId",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "66b065c08f4a9476f75bfe54"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
