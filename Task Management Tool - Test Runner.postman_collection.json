@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "8a581078-e791-4cbd-8164-e456b1cdf6a8",
+		"name": "Task Management Tool - Test Runner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37437977",
+		"_collection_link": "https://javeednz.postman.co/workspace/New-Team-Workspace~aea56d42-dd9c-4f11-a6d8-3a8e13e1bddc/collection/37437977-8a581078-e791-4cbd-8164-e456b1cdf6a8?action=share&source=collection_link&creator=37437977"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"test@mail.com\",\n    \"password\":\"testuser\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get CurrentUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/currentUser",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"currentUser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
